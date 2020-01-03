@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
 
-function App() {
+const App = () => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log('efeito só no inicial')
+  }, [])
+
+  useEffect(() => {
+    document.title = `Você clicou ${count} vezes`;
+    console.log('useEfect geral')
+  })
+
+  const multiplica = (e) => {
+    setCount(e.target.value)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button
+        onClick={() => setCount(count + 1)}
+      >
+        clicar
+      </button>
+      <br/>
+      <p>valor atual: { count }</p> 
+      <br/>
+      <input type="text" onChange={(e) => multiplica(e)}/>
     </div>
   );
 }
